@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
+import InputField from './Components/InputField';
 
 
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
-      hello world
+      <span className='heading'>TaskDrag</span>
+      <InputField/>
     </div>
   );
 }
