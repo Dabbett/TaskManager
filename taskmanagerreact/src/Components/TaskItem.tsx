@@ -46,8 +46,12 @@ const TaskItem = ({ index, task, tasks, setTasks}: Props) => {
   return (
     <Draggable draggableId={task.id.toString()} index={index}>
       {(provided) => (
-        <form className='tasks-single' onSubmit={(e) => handleEdit(e,task.id)}
-          {...provided.draggableProps}{...provided.dragHandleProps} ref={provided.innerRef}
+        <form 
+          className='tasks-single' 
+          onSubmit={(e) => handleEdit(e, task.id)}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps} 
+          ref={provided.innerRef}
         >
           {edit? (
                 <input 

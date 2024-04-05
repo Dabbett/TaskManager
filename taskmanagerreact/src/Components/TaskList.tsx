@@ -11,12 +11,16 @@ interface Props{
     setCompletedTasks:React.Dispatch<React.SetStateAction<Task[]>>
 }
 
-const TaskList: React.FC<Props> = ({tasks, setTasks, completedTasks, setCompletedTasks}) => {
+const TaskList: React.FC<Props> = ({
+  tasks,
+   setTasks,
+    completedTasks,
+    setCompletedTasks
+ }) => {
   return (
     <div className='container'>
-      <Droppable droppableId='TaskList' >
-        {
-          (provided) => (
+      <Droppable droppableId='TasksList' >
+        {(provided) => (
             <div className='tasks' ref={provided.innerRef} {...provided.droppableProps}>
               <span className='tasks-heading'>
           Open Tasks
@@ -32,33 +36,34 @@ const TaskList: React.FC<Props> = ({tasks, setTasks, completedTasks, setComplete
               />
               )
             })}
+            {provided.placeholder}
           </div>
           )
         }
       
       </Droppable>
-      <Droppable droppableId='TaskRemove'>
+      <Droppable droppableId='TasksRemove'>
         {(provided)=> (
-      
-      <div 
-        className='tasks remove'
-        ref={provided.innerRef}
-        {...provided.droppableProps}>
-      <span className='tasks-heading'>
-          Completed Tasks
-        </span>
-      {completedTasks.map((task, index) => {
-          return(
-          <TaskItem 
-          index={index}
-          task={task}
-          tasks={completedTasks}
-          key={task.id}
-          setTasks={setCompletedTasks}
-          />
-          )
-        })}
-      </div>
+          <div 
+            className='tasks remove'
+            ref={provided.innerRef}
+            {...provided.droppableProps}>
+          <span className='tasks-heading'>
+              Completed Tasks
+            </span>
+          {completedTasks.map((task, index) => {
+              return(
+              <TaskItem 
+              index={index}
+              task={task}
+              tasks={completedTasks}
+              key={task.id}
+              setTasks={setCompletedTasks}
+              />
+              )
+            })}
+            {provided.placeholder}
+          </div>
         )}
       </Droppable>
     </div>

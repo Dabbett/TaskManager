@@ -19,9 +19,7 @@ const InputField: React.FC<Props> = ({task, setTask, handleAdd}: Props) => {
         ref={inputRef}
         type='input' 
         value={task}
-        onChange={
-            (e) => setTask(e.target.value)
-            } 
+        onChange={(e) => setTask(e.target.value)} 
         className= 'input-box' 
         placeholder="Enter a task"/>
       <button className='input-submit' type='submit'>Add</button>
