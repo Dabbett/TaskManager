@@ -2,47 +2,65 @@ import React from 'react'
 import "./styles.css"
 import { Task } from './model'
 import TaskItem from './TaskItem'
+import { Droppable } from 'react-beautiful-dnd';
 
 interface Props{
     tasks:Task[];
     setTasks:React.Dispatch<React.SetStateAction<Task[]>>
+    completedTasks:Task[]
+    setCompletedTasks:React.Dispatch<React.SetStateAction<Task[]>>
 }
 
-const TaskList: React.FC<Props> = ({tasks, setTasks}) => {
+const TaskList: React.FC<Props> = ({tasks, setTasks, completedTasks, setCompletedTasks}) => {
   return (
     <div className='container'>
-      <div className='tasks'>
-        <span className='tasks-heading'>
+      <Droppable droppableId='TaskList' >
+        {
+          (provided) => (
+            <div className='tasks' ref={provided.innerRef} {...provided.droppableProps}>
+              <span className='tasks-heading'>
           Open Tasks
-        </span>
-        {tasks.map((task) => {
-          return(
-          <TaskItem 
-          task={task}
-          tasks={tasks}
-          key={task.id}
-          setTasks={setTasks}
-          />
+              </span>
+            {tasks.map((task, index) => {
+              return(
+              <TaskItem 
+              index={index}
+              task={task}
+              tasks={tasks}
+              key={task.id}
+              setTasks={setTasks}
+              />
+              )
+            })}
+          </div>
           )
-        })}
-      </div>
-
-      <div className='tasks remove'>
+        }
+      
+      </Droppable>
+      <Droppable droppableId='TaskRemove'>
+        {(provided)=> (
+      
+      <div 
+        className='tasks remove'
+        ref={provided.innerRef}
+        {...provided.droppableProps}>
       <span className='tasks-heading'>
           Completed Tasks
         </span>
-      {tasks.map((task) => {
+      {completedTasks.map((task, index) => {
           return(
           <TaskItem 
+          index={index}
           task={task}
-          tasks={tasks}
+          tasks={completedTasks}
           key={task.id}
-          setTasks={setTasks}
+          setTasks={setCompletedTasks}
           />
           )
         })}
       </div>
-      
+        )}
+      </Droppable>
     </div>
   )
 }
