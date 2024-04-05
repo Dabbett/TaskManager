@@ -1,5 +1,5 @@
-export interface Todo{
+export interface Task{
     id: number;
-    todo: string;
+    task: string;
     isDone: boolean;
 }
