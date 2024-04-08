@@ -20,8 +20,8 @@ const TaskList: React.FC<Props> = ({
   return (
     <div className='container'>
       <Droppable droppableId='TasksList' >
-        {(provided) => (
-            <div className='tasks' ref={provided.innerRef} {...provided.droppableProps}>
+        {(provided, snapshot) => (
+            <div className={`tasks ${snapshot.isDraggingOver?'dragactive': ''}`} ref={provided.innerRef} {...provided.droppableProps}>
               <span className='tasks-heading'>
           Open Tasks
               </span>

@@ -13,7 +13,7 @@ type Props = {
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>
 }
 
-const TaskItem = ({ index, task, tasks, setTasks}: Props) => {
+const TaskItem= ({ index, task, tasks, setTasks}: Props) => {
     const [edit, setEdit] = useState<boolean>(false)
     const [editTask, setEditTask] = useState<string>(task.task)
 
@@ -72,13 +72,13 @@ const TaskItem = ({ index, task, tasks, setTasks}: Props) => {
           <div>
             <span className='icon' onClick={()=>{
               if(!edit && !task.isDone){
-                setEdit(!edit)
+                setEdit(!edit);
               }}
             }>
-              <AiFillEdit/>
+              <AiFillEdit />
             </span>
             <span className='icon' onClick={()=> handleDelete(task.id)}>
-              <AiFillDelete/>
+              <AiFillDelete />
             </span>
             <span className='icon' onClick={()=> handleDone(task.id)}>
               <MdDone />
