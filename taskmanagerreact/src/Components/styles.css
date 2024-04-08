@@ -114,6 +114,7 @@
     }
     .tasks {
         width: 85%;
+        align-self: center;
     }
     .tasks-single {
         width: 85%;
