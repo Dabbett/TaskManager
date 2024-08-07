@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import InputField from './Components/InputField';
 import { Task } from './Components/model';
@@ -8,7 +8,12 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
   const [task, setTask] = useState<string>("");
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const localValue = localStorage.getItem("ITEMS")
+    if (localValue == null) return []
+
+    return JSON.parse(localValue)
+  });
   const [completedTasks, setCompletedTasks] = useState<Task[]>([])
 
   const handleAdd = (e:React.FormEvent) => {
@@ -54,6 +59,10 @@ const App: React.FC = () => {
     setCompletedTasks(complete);
     setTasks(active);
   }
+
+  useEffect(() => {
+    localStorage.setItem("ITEMS", JSON.stringify(tasks))
+  }, [tasks])
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
